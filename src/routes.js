@@ -4,10 +4,13 @@ const routes = express.Router();
 
 const DogController = require("./controllers/DogController");
 const LikeController = require("./controllers/LikeController");
+const BookmarkController = require("./controllers/BookmarkController");
 
-routes.get("/tweets", DogController.index);
-routes.post("/tweets", DogController.store);
+routes.get("/dos", DogController.index);
+routes.post("/dogs", DogController.store);
 
-routes.post("/likes/:id", LikeController.store);
+routes.post("/likes", LikeController.store);
+
+routes.post("/bookmarks", BookmarkController.store);
 
 module.exports = routes;

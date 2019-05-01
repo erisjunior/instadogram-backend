@@ -7,15 +7,14 @@ module.exports = {
     if (dogs.length < 1) {
       const dog = await Dog.create({
         id: req.body.id,
-        likes: 1,
-        likeds: [{ user: req.body.user }]
+        bookmarkeds: [{ user: req.body.user }]
       });
 
-      req.io.emit("like", dog);
+      req.io.emit("bookmark", dogs[0]);
     } else {
       const find = await Dog.find({
         id: req.body.id,
-        likeds: {
+        bookmarkeds: {
           $elemMatch: {
             user: req.body.user
           }
@@ -23,7 +22,7 @@ module.exports = {
       });
 
       if (find.length > 0) {
-        let users = dogs[0].likeds;
+        let users = dogs[0].bookmarkeds;
         const newUsers = users.map(user => {
           if (user.user === req.body.user) return;
           return user;
@@ -32,20 +31,20 @@ module.exports = {
           return el != null;
         });
 
-        dogs[0].set({ likes: dogs[0].likes - 1, likeds: filteredUser });
+        dogs[0].set({ bookmarkeds: filteredUser });
 
         await dogs[0].save();
 
-        req.io.emit("dislike", dogs[0]);
+        req.io.emit("unbookmark", dogs[0]);
       } else {
-        let users = dogs[0].likeds;
+        let users = dogs[0].bookmarkeds;
         users.push({ user: req.body.user });
 
-        dogs[0].set({ likes: dogs[0].likes + 1, likeds: users });
+        dogs[0].set({ bookmarkeds: users });
 
         await dogs[0].save();
 
-        req.io.emit("like", dogs[0]);
+        req.io.emit("bookmark", dogs[0]);
       }
     }
   }
