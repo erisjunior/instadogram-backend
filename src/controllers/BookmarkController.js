@@ -8,10 +8,11 @@ module.exports = {
       const dog = await Dog.create({
         id: req.body.id,
         url: req.body.url,
+        likeds: [],
         bookmarkeds: [{ user: req.body.user }]
       });
 
-      req.io.emit("bookmark", dogs[0]);
+      req.io.emit("bookmark", dog);
     } else {
       const find = await Dog.find({
         id: req.body.id,

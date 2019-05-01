@@ -7,8 +7,9 @@ module.exports = {
     if (dogs.length < 1) {
       const dog = await Dog.create({
         id: req.body.id,
-        likes: 1,
         url: req.body.url,
+        likes: 1,
+        bookmarkeds: [],
         likeds: [{ user: req.body.user }]
       });
 
