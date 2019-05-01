@@ -7,6 +7,7 @@ module.exports = {
     if (dogs.length < 1) {
       const dog = await Dog.create({
         id: req.body.id,
+        url: req.body.url,
         bookmarkeds: [{ user: req.body.user }]
       });
 

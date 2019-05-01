@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 
 const DogSchema = new mongoose.Schema({
   id: String,
+  url: String,
   likes: {
     type: Number,
     default: 0

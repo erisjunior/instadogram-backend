@@ -6,8 +6,7 @@ const DogController = require("./controllers/DogController");
 const LikeController = require("./controllers/LikeController");
 const BookmarkController = require("./controllers/BookmarkController");
 
-routes.get("/dos", DogController.index);
-routes.post("/dogs", DogController.store);
+routes.get("/dogs", DogController.index);
 
 routes.post("/likes", LikeController.store);
 
